@@ -34,12 +34,12 @@ public class JedisConfig {
     }
 
     @Bean
-    public JedisConnectionFactory jedisConnectionFactory() {
-        return new JedisConnectionFactory(jedisPoolConfig());
+    public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig) {
+        return new JedisConnectionFactory(jedisPoolConfig);
     }
 
     @Bean
-    public JedisPool jedisPool() {
-        return new JedisPool(jedisPoolConfig(), host, port, Integer.parseInt(maxWait.substring(0, maxWait.length() - 2)), null, database);
+    public JedisPool jedisPool(JedisPoolConfig jedisPoolConfig) {
+        return new JedisPool(jedisPoolConfig, host, port, Integer.parseInt(maxWait.substring(0, maxWait.length() - 2)), null, database);
     }
 }

@@ -11,6 +11,8 @@ public interface SysUserDao {
 
     SysUser selectByPrimaryKey(Long id);
 
+    SysUser selectByUsername(String username);
+
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
