@@ -47,8 +47,9 @@ spring:
       group-id: myGroup
 mybatis:
   type-aliases-package: com.example.boottest.entity
-  config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    cache-enabled: true
 logging:
   file: /Users/yibo/Logs/boottest.log
   level:
