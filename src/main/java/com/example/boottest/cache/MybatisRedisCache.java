@@ -77,6 +77,7 @@ public class MybatisRedisCache implements Cache {
     @Override
     public int getSize() {
         Long result = redisTemplate.execute(RedisServerCommands::dbSize);
+        assert result != null;
         return result.intValue();
     }
 
