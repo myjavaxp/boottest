@@ -3,7 +3,6 @@ package com.example.boottest.common;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.StringJoiner;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -14,7 +13,6 @@ import static org.springframework.http.HttpStatus.OK;
  */
 public class ResponseEntity<T> implements Serializable {
     private static final long serialVersionUID = -5950487642515880219L;
-    private Date timestamp = new Date();
     private Integer status;
     private String message;
     private T data;
@@ -50,14 +48,6 @@ public class ResponseEntity<T> implements Serializable {
         this.message = httpStatus.getReasonPhrase();
     }
 
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -85,7 +75,6 @@ public class ResponseEntity<T> implements Serializable {
     @Override
     public String toString() {
         return new StringJoiner(", ", ResponseEntity.class.getSimpleName() + "[", "]")
-                .add("timestamp=" + timestamp)
                 .add("status=" + status)
                 .add("message='" + message + "'")
                 .add("data=" + data)

@@ -42,22 +42,19 @@ public class GlobalExceptionHandler implements ErrorController {
     @GetMapping(ERROR_PATH)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Void> errorApiHandler(HttpServletRequest request, Exception e) {
+        e.printStackTrace();
         if (e instanceof CommonException) {
             CommonException commonException = (CommonException) e;
-            e.printStackTrace();
             return new ResponseEntity<>(commonException.getCode(), commonException.getMessage());
         }
         if (e instanceof NullPointerException) {
-            e.printStackTrace();
             return new ResponseEntity<>(Status.NULL_POINTER_EXCEPTION);
         }
         if (e instanceof BadSqlGrammarException) {
-            e.printStackTrace();
             return new ResponseEntity<>(Status.NOT_VALID_SQL);
         }
         if (e instanceof MethodArgumentNotValidException) {
             MethodArgumentNotValidException exception = (MethodArgumentNotValidException) e;
-            exception.printStackTrace();
             BindingResult result = exception.getBindingResult();
             List<FieldError> errors = result.getFieldErrors();
             StringBuilder stringBuilder = new StringBuilder();
@@ -69,7 +66,6 @@ public class GlobalExceptionHandler implements ErrorController {
         WebRequest webRequest = new ServletWebRequest(request);
         Map<String, Object> errorAttributes = this.errorAttributes.getErrorAttributes(webRequest, false);
         Integer statusCode = getStatus(request);
-        e.printStackTrace();
         Object error = errorAttributes.get("error");
         if (error != null && !"None".equals(String.valueOf(error))) {
             return new ResponseEntity<>(statusCode, String.valueOf(error));

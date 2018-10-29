@@ -51,3 +51,5 @@ logging:
   level:
     root: info
     com.example.boottest.dao: debug
+server:
+  port: 80

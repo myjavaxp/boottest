@@ -17,21 +17,21 @@ public class DruidConfig {
 
     @Bean
     public ServletRegistrationBean<StatViewServlet> servletRegistrationBean() {
-        ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>();
-        servletRegistrationBean.setServlet(new StatViewServlet());
-        servletRegistrationBean.addUrlMappings("/druid/*");
-        servletRegistrationBean.addInitParameter("loginUsername", username);
-        servletRegistrationBean.addInitParameter("loginPassword", password);
-        return servletRegistrationBean;
+        ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean<>();
+        bean.setServlet(new StatViewServlet());
+        bean.addUrlMappings("/druid/*");
+        bean.addInitParameter("loginUsername", username);
+        bean.addInitParameter("loginPassword", password);
+        return bean;
     }
 
     @Bean
     public FilterRegistrationBean<WebStatFilter> filterRegistrationBean() {
-        FilterRegistrationBean<WebStatFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(new WebStatFilter());
-        filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-        filterRegistrationBean.addInitParameter("profileEnable", "true");
-        return filterRegistrationBean;
+        FilterRegistrationBean<WebStatFilter> bean = new FilterRegistrationBean<>();
+        bean.setFilter(new WebStatFilter());
+        bean.addUrlPatterns("/*");
+        bean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        bean.addInitParameter("profileEnable", "true");
+        return bean;
     }
 }
