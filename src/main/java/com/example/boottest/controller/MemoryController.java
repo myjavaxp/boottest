@@ -18,6 +18,8 @@ import java.util.UUID;
  * -XX:HeapDumpPath=./
  * 或者使用jmap工具导出
  * jmap -dump:format=b,file=heap.hprof 16057
+ * 另外
+ * jstack pid > pid.txt把线程信息输出到txt文件中
  *
  * @author yibo
  */
