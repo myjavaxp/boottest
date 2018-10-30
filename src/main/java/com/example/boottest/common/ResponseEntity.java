@@ -13,7 +13,7 @@ import static org.springframework.http.HttpStatus.OK;
  */
 public class ResponseEntity<T> implements Serializable {
     private static final long serialVersionUID = -5950487642515880219L;
-    private Integer status;
+    private int status;
     private String message;
     private T data;
 
@@ -22,7 +22,7 @@ public class ResponseEntity<T> implements Serializable {
         this.message = OK.getReasonPhrase();
     }
 
-    public ResponseEntity(Integer status, String message) {
+    public ResponseEntity(int status, String message) {
         this.status = status;
         this.message = message;
     }
@@ -48,11 +48,11 @@ public class ResponseEntity<T> implements Serializable {
         this.message = httpStatus.getReasonPhrase();
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 
 public class CommonException extends RuntimeException {
     private static final long serialVersionUID = 3965781030087386799L;
-    private Integer code;
+    private int code;
 
     public CommonException(HttpStatus httpStatus) {
         super(httpStatus.getReasonPhrase());
@@ -17,16 +17,16 @@ public class CommonException extends RuntimeException {
         this.code = status.value();
     }
 
-    public CommonException(Integer code, String message) {
+    public CommonException(int code, String message) {
         super(message);
         this.code = code;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(int code) {
         this.code = code;
     }
 }

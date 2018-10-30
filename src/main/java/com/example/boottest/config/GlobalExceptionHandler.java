@@ -65,7 +65,7 @@ public class GlobalExceptionHandler implements ErrorController {
         }
         WebRequest webRequest = new ServletWebRequest(request);
         Map<String, Object> errorAttributes = this.errorAttributes.getErrorAttributes(webRequest, false);
-        Integer statusCode = getStatus(request);
+        int statusCode = getStatus(request);
         Object error = errorAttributes.get("error");
         if (error != null && !"None".equals(String.valueOf(error))) {
             return new ResponseEntity<>(statusCode, String.valueOf(error));

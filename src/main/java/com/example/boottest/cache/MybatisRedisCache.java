@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.Assert;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -76,9 +77,7 @@ public class MybatisRedisCache implements Cache {
 
     @Override
     public int getSize() {
-        Long result = redisTemplate.execute(RedisServerCommands::dbSize);
-        assert result != null;
-        return result.intValue();
+        return Objects.requireNonNull(redisTemplate.execute(RedisServerCommands::dbSize)).intValue();
     }
 
     @Override
