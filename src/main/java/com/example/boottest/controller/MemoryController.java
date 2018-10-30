@@ -20,12 +20,17 @@ import java.util.UUID;
  * jmap -dump:format=b,file=heap.hprof 16057
  * 另外
  * jstack pid > pid.txt把线程信息输出到txt文件中
+ * linux命令 top -p [pid] -H查看进程内的所有线程
+ * 这里的线程id为十进制，对应stack文件里的nid为十六进制，需要转化后观察
  *
  * @author yibo
  */
 @RestController
 @RequestMapping("/memory")
 public class MemoryController {
+    private final Object lock1 = new Object();
+    private final Object lock2 = new Object();
+
     /**
      * -Xmx64m -Xms64m
      * 测试堆内存溢出
@@ -54,5 +59,40 @@ public class MemoryController {
             classes.addAll(Metaspace.createClasses());
         }
         return new ResponseEntity<>(classes);
+    }
+
+    /**
+     * 死锁演示
+     * 可以通过查询jstack导出的文件看死锁
+     *
+     * @return 空返回体
+     */
+    @GetMapping("/deadlock")
+    public ResponseEntity<Void> deadlock() {
+        new Thread(() -> {
+            synchronized (lock1) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                synchronized (lock2) {
+                    System.out.println("Thread 1 over");
+                }
+            }
+        }).start();
+        new Thread(() -> {
+            synchronized (lock2) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                synchronized (lock1) {
+                    System.out.println("Thread 2 over");
+                }
+            }
+        }).start();
+        return new ResponseEntity<>();
     }
 }
