@@ -20,4 +20,14 @@ public class DeptController {
     public ResponseEntity<Dept> getDeptById(@PathVariable("id") int id) {
         return new ResponseEntity<>(deptService.getDeptById(id));
     }
+
+    @GetMapping("/one")
+    public ResponseEntity<Dept> getDept() {
+        return new ResponseEntity<>(new Dept(1, "22", "33"));
+    }
+
+    @GetMapping("/add")
+    public ResponseEntity<Dept> getUser(Dept dept) {
+        return new ResponseEntity<>(dept);
+    }
 }
