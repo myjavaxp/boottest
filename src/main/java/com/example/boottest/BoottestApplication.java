@@ -25,6 +25,21 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * 对于jar包
  * java -jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 xxx.jar
  * 最后netstat -anp | grep 端口号 可以通过端口看远程debug是否启用
+ * <p>
+ * 关于nginx 命令
+ * 启动 nginx
+ * 关闭 nginx -s stop
+ * 重启 nginx -s reload
+ * 查看编译参数 nginx -V
+ * 配置反向代理需要关闭selinux setenforce 0
+ * mac 下的配置文件在/usr/local/etc/nginx
+ * 配置监控信息
+ * location = /nginx_status {
+ * stub_status on;
+ * access_log off;
+ * allow 127.0.0.1;
+ * deny all;
+ * }
  *
  * @author yibo
  */
