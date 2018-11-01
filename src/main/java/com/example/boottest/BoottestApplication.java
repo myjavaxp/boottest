@@ -40,6 +40,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * allow 127.0.0.1;
  * deny all;
  * }
+ * 打开配置文件打开log日志。
+ * log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+ * '$status $body_bytes_sent "$http_referer" '
+ * '"$http_user_agent" "$http_x_forwarded_for"';
+ * <p>
+ * access_log  /Users/yibo/Logs/access.log  main;
+ * 安装python2 安装pip,然后pip install ngxtop
+ * 执行 ngxtop -c nginx配置文件 -g remote_addr 查看访问ip地址
+ * -i 'status==200' 执行状态过滤
  *
  * @author yibo
  */
