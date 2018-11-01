@@ -49,6 +49,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * 安装python2 安装pip,然后pip install ngxtop
  * 执行 ngxtop -c nginx配置文件 -g remote_addr 查看访问ip地址
  * -i 'status==200' 执行状态过滤
+ * <p>
+ * 关于JVM
+ * 大对象直接进入老年代
+ * 可以设置参数来规定何为大对象
+ * -XX:PretenureSizeThreshold
+ * 长期存活对象进入老年代
+ * -XX:MaxTenuringThreshold
+ * -XX:+PrintTenuringDistribution
+ * -XX:TargetSurvivorRatio
+ * -XX:MaxGCPauseMills 设置最大停顿时间
+ * -XX:GCTimeRatio=<n> 垃圾收集时间占1/1+n;
+ * -XX:+UseSerialGC -XX:+UseSerialOldGC 使用串行GC
+ * Parallel Server模式默认GC
  *
  * @author yibo
  */
