@@ -1,0 +1,20 @@
+-XX:+UseG1GC -XX:+PrintTenuringDistribution -XX:+PrintHeapAtGC
+-XX:+UseG1GC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -Xloggc:/Users/yibo/Logs/gc.log
+
+G1GC日志分析
+[Parallel Time: 13.9 ms, GC Workers: 8] – 表明下列活动由8个线程并行执行,消耗的时间为13.9毫秒(real time)。
+[GC Worker Start (ms) – GC的worker线程开始启动时,相对于 pause 开始的时间戳。如果 Min 和 Max 差别很大,则表明本机其他进程所使用的线程数量过多, 挤占了GC的CPU时间。
+[Ext Root Scanning (ms) – 用了多长时间来扫描堆外(non-heap)的root, 如 classloaders, JNI引用, JVM的系统root等。后面显示了运行时间, “Sum” 指的是CPU时间。
+[Code Root Scanning (ms) – 用了多长时间来扫描实际代码中的 root: 例如局部变量等等(local vars)。
+[Object Copy (ms) – 用了多长时间来拷贝收集区内的存活对象。
+[Termination (ms) – GC的worker线程用了多长时间来确保自身可以安全地停止, 这段时间什么也不用做, stop 之后该线程就终止运行了。
+[Termination Attempts – GC的worker 线程尝试多少次 try 和 teminate。如果worker发现还有一些任务没处理完,则这一次尝试就是失败的, 暂时还不能终止。
+[GC Worker Other (ms) – 一些琐碎的小活动,在GC日志中不值得单独列出来。
+GC Worker Total (ms) – GC的worker 线程的工作时间总计。
+[GC Worker End (ms) – GC的worker 线程完成作业的时间戳。通常来说这部分数字应该大致相等, 否则就说明有太多的线程被挂起, 很可能是因为坏邻居效应(noisy neighbor) 所导致的。
+
+-XX:+DisableExplicitGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/Users/yibo/Logs/ -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -Xloggc:/Users/yibo/Logs/gc.log
+默认GC的调优
+-XX:+DisableExplicitGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/Users/yibo/Logs/ -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -Xloggc:/Users/yibo/Logs/gc.log -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:MaxGCPauseMillis=50 -XX:GCTimeRatio=99 -XX:YoungGenerationSizeIncrement=30
+G1GC参数
+-XX:+DisableExplicitGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/Users/yibo/Logs/ -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -Xloggc:/Users/yibo/Logs/gc.log -XX:+UseG1GC -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:MaxGCPauseMillis=100 -Xmx512m -Xms256m
