@@ -12,6 +12,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * docker简易部署redis
  * docker pull redis
  * docker run -d -p 6379:6379 --name redis redis
+ * 快速进入docker访问redis
+ * docker exec -it redis /bin/bash
  *
  * @author yibo
  */
