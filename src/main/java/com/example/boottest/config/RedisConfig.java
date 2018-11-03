@@ -9,6 +9,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * Redis配置信息
+ * docker简易部署redis
+ * docker pull redis
+ * docker run -d -p 6379:6379 --name redis redis
  *
  * @author yibo
  */
