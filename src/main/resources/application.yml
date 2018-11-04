@@ -38,9 +38,9 @@ spring:
     host: localhost
     port: 6379
     database: 0
-  jackson:
-    time-zone: GMT+8
-    date-format: yyyy-MM-dd HH:mm:ss
+#  jackson:
+#    time-zone: GMT+8
+#    date-format: yyyy-MM-dd HH:mm:ss
 mybatis:
   type-aliases-package: com.example.boottest.entity
   mapper-locations: classpath:/mapper/*.xml
