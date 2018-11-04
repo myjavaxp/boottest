@@ -31,7 +31,6 @@ public class ConcurrencyTest {
                 }
                 countDownLatch.countDown();
             });
-
         }
         try {
             countDownLatch.await();
