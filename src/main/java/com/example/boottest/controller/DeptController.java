@@ -3,6 +3,7 @@ package com.example.boottest.controller;
 import com.example.boottest.common.ResponseEntity;
 import com.example.boottest.entity.Dept;
 import com.example.boottest.service.DeptService;
+import com.example.boottest.thread.local.RequestHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,5 +34,10 @@ public class DeptController {
     @GetMapping("/add")
     public ResponseEntity<Dept> getUser(Dept dept) {
         return new ResponseEntity<>(dept);
+    }
+
+    @GetMapping("/thread")
+    public ResponseEntity<Long> getThread() {
+        return new ResponseEntity<>(RequestHolder.getId());
     }
 }
