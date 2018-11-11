@@ -2,6 +2,7 @@ package com.example.boottest.controller;
 
 import com.example.boottest.common.ResponseEntity;
 import com.example.boottest.thread.SyncDemo;
+import com.example.boottest.thread.UnsafePublish;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PreDestroy;
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -24,6 +26,16 @@ public class SyncController {
         EXECUTOR_SERVICE.execute(() -> syncDemo1.test1(1));
         EXECUTOR_SERVICE.execute(() -> SyncDemo.test2(2));
         EXECUTOR_SERVICE.execute(() -> syncDemo1.test3(3));
+        return new ResponseEntity<>();
+    }
+
+    @GetMapping("/publish")
+    public ResponseEntity<Void> publish() {
+        UnsafePublish publish = new UnsafePublish();
+        LOGGER.info(Arrays.toString(publish.getArray()));
+        String[] array = publish.getArray();
+        array[0] = "修改私有域";
+        LOGGER.info(Arrays.toString(publish.getArray()));
         return new ResponseEntity<>();
     }
 
