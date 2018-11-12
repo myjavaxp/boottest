@@ -9,6 +9,11 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.RecursiveTask;
 
+/**
+ * 另外需要学习一下阻塞队列
+ *
+ * @author Yibo
+ */
 public class ForkAndJoinTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(ForkAndJoinTest.class);
 
