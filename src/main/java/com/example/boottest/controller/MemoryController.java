@@ -72,7 +72,7 @@ public class MemoryController {
         new Thread(() -> {
             synchronized (lock1) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1000L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -84,7 +84,7 @@ public class MemoryController {
         new Thread(() -> {
             synchronized (lock2) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1000L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
