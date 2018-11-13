@@ -22,11 +22,14 @@ public class DownloadServiceImpl implements DownloadService {
         Cell cell = row.createCell(0);
         cell.setCellValue(new Date());
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        workbook.write(outputStream);
-        byte[] bytes = outputStream.toByteArray();
-        outputStream.flush();
-        workbook.close();
-        outputStream.close();
-        return bytes;
+        try {
+            workbook.write(outputStream);
+            byte[] bytes = outputStream.toByteArray();
+            outputStream.flush();
+            return bytes;
+        } finally {
+            workbook.close();
+            outputStream.close();
+        }
     }
 }
