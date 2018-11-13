@@ -16,20 +16,16 @@ import java.util.Date;
 public class DownloadServiceImpl implements DownloadService {
     @Override
     public byte[] download() throws IOException {
-        Workbook workbook = new SXSSFWorkbook();
-        Sheet sheet = workbook.createSheet("我的Excel");
-        Row row = sheet.createRow(0);
-        Cell cell = row.createCell(0);
-        cell.setCellValue(new Date());
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try {
+        try (Workbook workbook = new SXSSFWorkbook();
+             ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            Sheet sheet = workbook.createSheet("我的Excel");
+            Row row = sheet.createRow(0);
+            Cell cell = row.createCell(0);
+            cell.setCellValue(new Date());
             workbook.write(outputStream);
             byte[] bytes = outputStream.toByteArray();
             outputStream.flush();
             return bytes;
-        } finally {
-            workbook.close();
-            outputStream.close();
         }
     }
 }
