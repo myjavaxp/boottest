@@ -18,6 +18,7 @@ public class ForkAndJoinTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(ForkAndJoinTest.class);
 
     private class Example extends RecursiveTask<Integer> {
+        private static final long serialVersionUID = 3065394751260895867L;
         private static final int HOLD = 2;
         private int start;
         private int end;
