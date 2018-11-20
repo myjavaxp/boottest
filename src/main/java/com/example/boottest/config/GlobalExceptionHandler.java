@@ -55,14 +55,10 @@ public class GlobalExceptionHandler implements ErrorController {
             return new ResponseEntity<>(Status.NOT_VALID_SQL);
         }
         if (e instanceof BindException) {
-            BindException exception = (BindException) e;
-            BindingResult result = exception.getBindingResult();
-            return getResponseEntity(result);
+            return getResponse(((BindException) e).getBindingResult());
         }
         if (e instanceof MethodArgumentNotValidException) {
-            MethodArgumentNotValidException exception = (MethodArgumentNotValidException) e;
-            BindingResult result = exception.getBindingResult();
-            return getResponseEntity(result);
+            return getResponse(((MethodArgumentNotValidException) e).getBindingResult());
         }
         WebRequest webRequest = new ServletWebRequest(request);
         Map<String, Object> errorAttributes = this.errorAttributes.getErrorAttributes(webRequest, false);
@@ -74,7 +70,7 @@ public class GlobalExceptionHandler implements ErrorController {
         return new ResponseEntity<>(statusCode, String.valueOf(errorAttributes.getOrDefault("message", "error")));
     }
 
-    private ResponseEntity<Void> getResponseEntity(BindingResult result) {
+    private ResponseEntity<Void> getResponse(BindingResult result) {
         List<FieldError> errors = result.getFieldErrors();
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < errors.size() - 1; i++) {
