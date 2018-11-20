@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LoggerAdvice {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggerAdvice.class);
+    private static final String EMPTY = "";
 
     @Pointcut("within(com.example.boottest..*)")
     public void logPointcut() {
@@ -38,11 +39,11 @@ public class LoggerAdvice {
 
     private String parseParams(Object[] params) {
         if (null == params) {
-            return "";
+            return EMPTY;
         }
         int size = params.length;
         if (size < 1) {
-            return "";
+            return EMPTY;
         }
         StringBuilder param = new StringBuilder();
         for (int i = 0; i < size - 1; i++) {
