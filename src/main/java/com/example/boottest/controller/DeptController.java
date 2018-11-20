@@ -1,5 +1,6 @@
 package com.example.boottest.controller;
 
+import com.example.boottest.aop.LoggerManager;
 import com.example.boottest.common.ResponseEntity;
 import com.example.boottest.entity.Dept;
 import com.example.boottest.service.DeptService;
@@ -30,7 +31,11 @@ public class DeptController {
     }
 
     @PostMapping("/add")
+    @LoggerManager(description = "添加部门")
     public ResponseEntity<Dept> getUser(@RequestBody @Valid Dept dept) {
+        if (dept.getId() == null) {
+            throw new RuntimeException("ID不能为空");
+        }
         return new ResponseEntity<>(dept);
     }
 
