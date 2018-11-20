@@ -22,9 +22,11 @@ public class HttpFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        LOGGER.info("do filter:{},{}", Thread.currentThread().getId(), httpServletRequest.getServletPath());
+        LOGGER.info("请求线程ID:{},请求地址为:{}", Thread.currentThread().getId(), httpServletRequest.getServletPath());
         RequestHolder.add(Thread.currentThread().getId());//这里其实可以放入用户ID
+        long start = System.currentTimeMillis();
         chain.doFilter(request, response);
+        LOGGER.info("请求处理用时:[{}]毫秒", System.currentTimeMillis() - start);
     }
 
     @Override

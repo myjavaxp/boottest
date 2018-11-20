@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.jdbc.BadSqlGrammarException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -53,15 +54,15 @@ public class GlobalExceptionHandler implements ErrorController {
         if (e instanceof BadSqlGrammarException) {
             return new ResponseEntity<>(Status.NOT_VALID_SQL);
         }
+        if (e instanceof BindException) {
+            BindException exception = (BindException) e;
+            BindingResult result = exception.getBindingResult();
+            return getResponseEntity(result);
+        }
         if (e instanceof MethodArgumentNotValidException) {
             MethodArgumentNotValidException exception = (MethodArgumentNotValidException) e;
             BindingResult result = exception.getBindingResult();
-            List<FieldError> errors = result.getFieldErrors();
-            StringBuilder stringBuilder = new StringBuilder();
-            for (FieldError error : errors) {
-                stringBuilder.append(error.getDefaultMessage()).append(" ");
-            }
-            return new ResponseEntity<>(99999, stringBuilder.toString());
+            return getResponseEntity(result);
         }
         WebRequest webRequest = new ServletWebRequest(request);
         Map<String, Object> errorAttributes = this.errorAttributes.getErrorAttributes(webRequest, false);
@@ -71,6 +72,16 @@ public class GlobalExceptionHandler implements ErrorController {
             return new ResponseEntity<>(statusCode, error.toString());
         }
         return new ResponseEntity<>(statusCode, String.valueOf(errorAttributes.getOrDefault("message", "error")));
+    }
+
+    private ResponseEntity<Void> getResponseEntity(BindingResult result) {
+        List<FieldError> errors = result.getFieldErrors();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < errors.size() - 1; i++) {
+            stringBuilder.append(errors.get(i).getDefaultMessage()).append(" ");
+        }
+        stringBuilder.append(errors.get(errors.size() - 1).getDefaultMessage());
+        return new ResponseEntity<>(400, stringBuilder.toString());
     }
 
     private Integer getStatus(HttpServletRequest request) {
