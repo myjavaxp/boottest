@@ -1,5 +1,6 @@
 package com.example.boottest.controller;
 
+import com.example.boottest.aop.LoggerManager;
 import com.example.boottest.common.ResponseEntity;
 import com.example.boottest.thread.SyncDemo;
 import com.example.boottest.thread.UnsafePublish;
@@ -30,6 +31,7 @@ public class SyncController {
     }
 
     @GetMapping("/publish")
+    @LoggerManager(description = "不安全发布对象")
     public ResponseEntity<Void> publish() {
         UnsafePublish publish = new UnsafePublish();
         LOGGER.info(Arrays.toString(publish.getArray()));
