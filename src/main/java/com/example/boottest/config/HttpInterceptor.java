@@ -22,6 +22,6 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         RequestHolder.remove();
-        LOGGER.info("移除ThreadLocal");
+        LOGGER.info("拦截器移除ThreadLocal");
     }
 }
