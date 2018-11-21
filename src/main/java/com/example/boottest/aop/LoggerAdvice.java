@@ -22,7 +22,7 @@ public class LoggerAdvice {
     @Before("logPointcut()&&@annotation(loggerManager)")
     public void addBeforeLogger(JoinPoint joinPoint, LoggerManager loggerManager) {
         LOGGER.info("执行[{}]开始", loggerManager.description());
-        LOGGER.info("方法名为[{}]", joinPoint.getSignature().toShortString());
+        LOGGER.info("方法名为:[{}]", joinPoint.getSignature().toShortString());
         LOGGER.info("传入参数为:\n{}", parseParams(joinPoint.getArgs()));
     }
 
