@@ -8,5 +8,6 @@ public class CommonConstants {
             SerializerFeature.WriteNullListAsEmpty,
             SerializerFeature.WriteNullStringAsEmpty,
             SerializerFeature.WriteNonStringKeyAsString,
-            SerializerFeature.WriteMapNullValue};
+            SerializerFeature.WriteMapNullValue,
+            SerializerFeature.IgnoreNonFieldGetter};
 }
