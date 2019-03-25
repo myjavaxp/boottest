@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @ControllerAdvice
@@ -77,7 +78,7 @@ public class GlobalExceptionHandler implements ErrorController {
             stringBuilder.append(errors.get(i).getDefaultMessage()).append(" ");
         }
         stringBuilder.append(errors.get(errors.size() - 1).getDefaultMessage());
-        return new ResponseEntity<>(400, stringBuilder.toString());
+        return new ResponseEntity<>(BAD_REQUEST.value(), stringBuilder.toString());
     }
 
     private Integer getStatus(HttpServletRequest request) {
