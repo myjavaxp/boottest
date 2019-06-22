@@ -2,6 +2,8 @@ package com.example.boottest.dao;
 
 import com.example.boottest.entity.Employee;
 
+import java.util.List;
+
 public interface EmployeeDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface EmployeeDao {
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);
+
+    List<Integer> getIdList();
 }

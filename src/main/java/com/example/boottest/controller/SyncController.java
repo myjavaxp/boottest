@@ -4,8 +4,7 @@ import com.example.boottest.aop.LoggerManager;
 import com.example.boottest.common.ResponseEntity;
 import com.example.boottest.thread.SyncDemo;
 import com.example.boottest.thread.UnsafePublish;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +16,8 @@ import java.util.concurrent.Executors;
 
 @RestController
 @RequestMapping("/sync")
+@Slf4j
 public class SyncController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SyncController.class);
     private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
 
     @GetMapping("/class")
@@ -34,16 +33,16 @@ public class SyncController {
     @LoggerManager(description = "不安全发布对象")
     public ResponseEntity<Void> publish() {
         UnsafePublish publish = new UnsafePublish();
-        LOGGER.info(Arrays.toString(publish.getArray()));
+        log.info(Arrays.toString(publish.getArray()));
         String[] array = publish.getArray();
         array[0] = "修改私有域";
-        LOGGER.info(Arrays.toString(publish.getArray()));
+        log.info(Arrays.toString(publish.getArray()));
         return new ResponseEntity<>();
     }
 
     @PreDestroy
     public void destroy() {
-        LOGGER.info("关闭线程池...");
+        log.info("关闭线程池...");
         EXECUTOR_SERVICE.shutdown();
     }
 }

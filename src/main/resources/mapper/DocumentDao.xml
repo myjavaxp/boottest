@@ -2,30 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.boottest.dao.DocumentDao">
     <resultMap id="BaseResultMap" type="com.example.boottest.entity.Document">
-        <id column="ID" jdbcType="INTEGER" property="id"/>
-        <result column="TITLE" jdbcType="VARCHAR" property="title"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="filename" jdbcType="VARCHAR" property="filename"/>
-        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
-        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
-        <result column="USER_ID" jdbcType="INTEGER" property="userId"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, TITLE, filename, REMARK, CREATE_DATE, USER_ID
+        id, title, filename, remark, create_date, user_id
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from document_inf
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from document_inf
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.example.boottest.entity.Document">
-        insert into document_inf (ID, TITLE, filename,
-                                  REMARK, CREATE_DATE, USER_ID)
+        insert into document_inf (id, title, filename,
+                                  remark, create_date, user_id)
         values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR},
                 #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER})
     </insert>
@@ -33,22 +33,22 @@
         insert into document_inf
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                ID,
+                id,
             </if>
             <if test="title != null">
-                TITLE,
+                title,
             </if>
             <if test="filename != null">
                 filename,
             </if>
             <if test="remark != null">
-                REMARK,
+                remark,
             </if>
             <if test="createDate != null">
-                CREATE_DATE,
+                create_date,
             </if>
             <if test="userId != null">
-                USER_ID,
+                user_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -76,30 +76,30 @@
         update document_inf
         <set>
             <if test="title != null">
-                TITLE = #{title,jdbcType=VARCHAR},
+                title = #{title,jdbcType=VARCHAR},
             </if>
             <if test="filename != null">
                 filename = #{filename,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
-                REMARK = #{remark,jdbcType=VARCHAR},
+                remark = #{remark,jdbcType=VARCHAR},
             </if>
             <if test="createDate != null">
-                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+                create_date = #{createDate,jdbcType=TIMESTAMP},
             </if>
             <if test="userId != null">
-                USER_ID = #{userId,jdbcType=INTEGER},
+                user_id = #{userId,jdbcType=INTEGER},
             </if>
         </set>
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Document">
         update document_inf
-        set TITLE       = #{title,jdbcType=VARCHAR},
+        set title       = #{title,jdbcType=VARCHAR},
             filename    = #{filename,jdbcType=VARCHAR},
-            REMARK      = #{remark,jdbcType=VARCHAR},
-            CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-            USER_ID     = #{userId,jdbcType=INTEGER}
-        where ID = #{id,jdbcType=INTEGER}
+            remark      = #{remark,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            user_id     = #{userId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

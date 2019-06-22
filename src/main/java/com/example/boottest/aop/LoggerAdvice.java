@@ -2,16 +2,15 @@ package com.example.boottest.aop;
 
 import com.alibaba.fastjson.JSON;
 import com.example.boottest.constant.CommonConstants;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
+@Slf4j
 public class LoggerAdvice {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoggerAdvice.class);
     private static final String EMPTY = "";
 
     @Pointcut("within(com.example.boottest..*)")
@@ -21,20 +20,20 @@ public class LoggerAdvice {
 
     @Before("logPointcut()&&@annotation(loggerManager)")
     public void addBeforeLogger(JoinPoint joinPoint, LoggerManager loggerManager) {
-        LOGGER.info("执行[{}]开始", loggerManager.description());
-        LOGGER.info("方法名为:[{}]", joinPoint.getSignature().toShortString());
-        LOGGER.info("传入参数为:\n{}", parseParams(joinPoint.getArgs()));
+        log.info("执行[{}]开始", loggerManager.description());
+        log.info("方法名为:[{}]", joinPoint.getSignature().toShortString());
+        log.info("传入参数为:\n{}", parseParams(joinPoint.getArgs()));
     }
 
     @AfterReturning(pointcut = "logPointcut()&&@annotation(loggerManager)", returning = "result")
     public void addAfterReturningLogger(LoggerManager loggerManager, Object result) {
-        LOGGER.info("执行[{}]结束", loggerManager.description());
-        LOGGER.info("执行结果为:\n{}", JSON.toJSONString(result, CommonConstants.FEATURES));
+        log.info("执行[{}]结束", loggerManager.description());
+        log.info("执行结果为:\n{}", JSON.toJSONString(result, CommonConstants.FEATURES));
     }
 
     @AfterThrowing(pointcut = "logPointcut()&&@annotation(loggerManager)", throwing = "e")
     public void addAfterThrowingLogger(LoggerManager loggerManager, Exception e) {
-        LOGGER.error("执行[{}]发生异常:{}", loggerManager.description(), e.getMessage());
+        log.error("执行[{}]发生异常:{}", loggerManager.description(), e.getMessage());
     }
 
     private String parseParams(Object[] params) {

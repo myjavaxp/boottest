@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.boottest.dao.DeptDao">
-    <cache type="com.example.boottest.cache.MybatisRedisCache"/>
     <resultMap id="BaseResultMap" type="com.example.boottest.entity.Dept">
-        <id column="ID" jdbcType="INTEGER" property="id"/>
-        <result column="NAME" jdbcType="VARCHAR" property="name"/>
-        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, NAME, REMARK
+        id, name, remark
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from dept_inf
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from dept_inf
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.example.boottest.entity.Dept">
-        insert into dept_inf (ID, NAME, REMARK)
+        insert into dept_inf (id, name, remark)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.example.boottest.entity.Dept">
         insert into dept_inf
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                ID,
+                id,
             </if>
             <if test="name != null">
-                NAME,
+                name,
             </if>
             <if test="remark != null">
-                REMARK,
+                remark,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -54,18 +53,18 @@
         update dept_inf
         <set>
             <if test="name != null">
-                NAME = #{name,jdbcType=VARCHAR},
+                name = #{name,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
-                REMARK = #{remark,jdbcType=VARCHAR},
+                remark = #{remark,jdbcType=VARCHAR},
             </if>
         </set>
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Dept">
         update dept_inf
-        set NAME   = #{name,jdbcType=VARCHAR},
-            REMARK = #{remark,jdbcType=VARCHAR}
-        where ID = #{id,jdbcType=INTEGER}
+        set name   = #{name,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

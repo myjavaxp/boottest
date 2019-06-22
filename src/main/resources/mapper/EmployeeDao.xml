@@ -2,50 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.boottest.dao.EmployeeDao">
     <resultMap id="BaseResultMap" type="com.example.boottest.entity.Employee">
-        <id column="ID" jdbcType="INTEGER" property="id"/>
-        <result column="DEPT_ID" jdbcType="INTEGER" property="deptId"/>
-        <result column="JOB_ID" jdbcType="INTEGER" property="jobId"/>
-        <result column="NAME" jdbcType="VARCHAR" property="name"/>
-        <result column="CARD_ID" jdbcType="VARCHAR" property="cardId"/>
-        <result column="ADDRESS" jdbcType="VARCHAR" property="address"/>
-        <result column="POST_CODE" jdbcType="VARCHAR" property="postCode"/>
-        <result column="TEL" jdbcType="VARCHAR" property="tel"/>
-        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
-        <result column="QQ_NUM" jdbcType="VARCHAR" property="qqNum"/>
-        <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
-        <result column="SEX" jdbcType="INTEGER" property="sex"/>
-        <result column="PARTY" jdbcType="VARCHAR" property="party"/>
-        <result column="BIRTHDAY" jdbcType="TIMESTAMP" property="birthday"/>
-        <result column="RACE" jdbcType="VARCHAR" property="race"/>
-        <result column="EDUCATION" jdbcType="VARCHAR" property="education"/>
-        <result column="SPECIALITY" jdbcType="VARCHAR" property="speciality"/>
-        <result column="HOBBY" jdbcType="VARCHAR" property="hobby"/>
-        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
-        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="dept_id" jdbcType="INTEGER" property="deptId"/>
+        <result column="job_id" jdbcType="INTEGER" property="jobId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="card_id" jdbcType="VARCHAR" property="cardId"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="post_code" jdbcType="VARCHAR" property="postCode"/>
+        <result column="tel" jdbcType="VARCHAR" property="tel"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="qq_num" jdbcType="VARCHAR" property="qqNum"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="party" jdbcType="VARCHAR" property="party"/>
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthday"/>
+        <result column="race" jdbcType="VARCHAR" property="race"/>
+        <result column="education" jdbcType="VARCHAR" property="education"/>
+        <result column="speciality" jdbcType="VARCHAR" property="speciality"/>
+        <result column="hobby" jdbcType="VARCHAR" property="hobby"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, DEPT_ID, JOB_ID, NAME, CARD_ID, ADDRESS, POST_CODE, TEL, PHONE, QQ_NUM, EMAIL,
-    SEX, PARTY, BIRTHDAY, RACE, EDUCATION, SPECIALITY, HOBBY, REMARK, CREATE_DATE
+        id, dept_id, job_id, name, card_id, address, post_code, tel, phone, qq_num, email,
+    sex, party, birthday, race, education, speciality, hobby, remark, create_date
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from employee_inf
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from employee_inf
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.example.boottest.entity.Employee">
-        insert into employee_inf (ID, DEPT_ID, JOB_ID,
-                                  NAME, CARD_ID, ADDRESS,
-                                  POST_CODE, TEL, PHONE,
-                                  QQ_NUM, EMAIL, SEX,
-                                  PARTY, BIRTHDAY, RACE,
-                                  EDUCATION, SPECIALITY, HOBBY,
-                                  REMARK, CREATE_DATE)
+        insert into employee_inf (id, dept_id, job_id,
+                                  name, card_id, address,
+                                  post_code, tel, phone,
+                                  qq_num, email, sex,
+                                  party, birthday, race,
+                                  education, speciality, hobby,
+                                  remark, create_date)
         values (#{id,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER},
                 #{name,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
                 #{postCode,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
@@ -58,64 +58,64 @@
         insert into employee_inf
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                ID,
+                id,
             </if>
             <if test="deptId != null">
-                DEPT_ID,
+                dept_id,
             </if>
             <if test="jobId != null">
-                JOB_ID,
+                job_id,
             </if>
             <if test="name != null">
-                NAME,
+                name,
             </if>
             <if test="cardId != null">
-                CARD_ID,
+                card_id,
             </if>
             <if test="address != null">
-                ADDRESS,
+                address,
             </if>
             <if test="postCode != null">
-                POST_CODE,
+                post_code,
             </if>
             <if test="tel != null">
-                TEL,
+                tel,
             </if>
             <if test="phone != null">
-                PHONE,
+                phone,
             </if>
             <if test="qqNum != null">
-                QQ_NUM,
+                qq_num,
             </if>
             <if test="email != null">
-                EMAIL,
+                email,
             </if>
             <if test="sex != null">
-                SEX,
+                sex,
             </if>
             <if test="party != null">
-                PARTY,
+                party,
             </if>
             <if test="birthday != null">
-                BIRTHDAY,
+                birthday,
             </if>
             <if test="race != null">
-                RACE,
+                race,
             </if>
             <if test="education != null">
-                EDUCATION,
+                education,
             </if>
             <if test="speciality != null">
-                SPECIALITY,
+                speciality,
             </if>
             <if test="hobby != null">
-                HOBBY,
+                hobby,
             </if>
             <if test="remark != null">
-                REMARK,
+                remark,
             </if>
             <if test="createDate != null">
-                CREATE_DATE,
+                create_date,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -185,86 +185,91 @@
         update employee_inf
         <set>
             <if test="deptId != null">
-                DEPT_ID = #{deptId,jdbcType=INTEGER},
+                dept_id = #{deptId,jdbcType=INTEGER},
             </if>
             <if test="jobId != null">
-                JOB_ID = #{jobId,jdbcType=INTEGER},
+                job_id = #{jobId,jdbcType=INTEGER},
             </if>
             <if test="name != null">
-                NAME = #{name,jdbcType=VARCHAR},
+                name = #{name,jdbcType=VARCHAR},
             </if>
             <if test="cardId != null">
-                CARD_ID = #{cardId,jdbcType=VARCHAR},
+                card_id = #{cardId,jdbcType=VARCHAR},
             </if>
             <if test="address != null">
-                ADDRESS = #{address,jdbcType=VARCHAR},
+                address = #{address,jdbcType=VARCHAR},
             </if>
             <if test="postCode != null">
-                POST_CODE = #{postCode,jdbcType=VARCHAR},
+                post_code = #{postCode,jdbcType=VARCHAR},
             </if>
             <if test="tel != null">
-                TEL = #{tel,jdbcType=VARCHAR},
+                tel = #{tel,jdbcType=VARCHAR},
             </if>
             <if test="phone != null">
-                PHONE = #{phone,jdbcType=VARCHAR},
+                phone = #{phone,jdbcType=VARCHAR},
             </if>
             <if test="qqNum != null">
-                QQ_NUM = #{qqNum,jdbcType=VARCHAR},
+                qq_num = #{qqNum,jdbcType=VARCHAR},
             </if>
             <if test="email != null">
-                EMAIL = #{email,jdbcType=VARCHAR},
+                email = #{email,jdbcType=VARCHAR},
             </if>
             <if test="sex != null">
-                SEX = #{sex,jdbcType=INTEGER},
+                sex = #{sex,jdbcType=INTEGER},
             </if>
             <if test="party != null">
-                PARTY = #{party,jdbcType=VARCHAR},
+                party = #{party,jdbcType=VARCHAR},
             </if>
             <if test="birthday != null">
-                BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+                birthday = #{birthday,jdbcType=TIMESTAMP},
             </if>
             <if test="race != null">
-                RACE = #{race,jdbcType=VARCHAR},
+                race = #{race,jdbcType=VARCHAR},
             </if>
             <if test="education != null">
-                EDUCATION = #{education,jdbcType=VARCHAR},
+                education = #{education,jdbcType=VARCHAR},
             </if>
             <if test="speciality != null">
-                SPECIALITY = #{speciality,jdbcType=VARCHAR},
+                speciality = #{speciality,jdbcType=VARCHAR},
             </if>
             <if test="hobby != null">
-                HOBBY = #{hobby,jdbcType=VARCHAR},
+                hobby = #{hobby,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
-                REMARK = #{remark,jdbcType=VARCHAR},
+                remark = #{remark,jdbcType=VARCHAR},
             </if>
             <if test="createDate != null">
-                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+                create_date = #{createDate,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Employee">
         update employee_inf
-        set DEPT_ID     = #{deptId,jdbcType=INTEGER},
-            JOB_ID      = #{jobId,jdbcType=INTEGER},
-            NAME        = #{name,jdbcType=VARCHAR},
-            CARD_ID     = #{cardId,jdbcType=VARCHAR},
-            ADDRESS     = #{address,jdbcType=VARCHAR},
-            POST_CODE   = #{postCode,jdbcType=VARCHAR},
-            TEL         = #{tel,jdbcType=VARCHAR},
-            PHONE       = #{phone,jdbcType=VARCHAR},
-            QQ_NUM      = #{qqNum,jdbcType=VARCHAR},
-            EMAIL       = #{email,jdbcType=VARCHAR},
-            SEX         = #{sex,jdbcType=INTEGER},
-            PARTY       = #{party,jdbcType=VARCHAR},
-            BIRTHDAY    = #{birthday,jdbcType=TIMESTAMP},
-            RACE        = #{race,jdbcType=VARCHAR},
-            EDUCATION   = #{education,jdbcType=VARCHAR},
-            SPECIALITY  = #{speciality,jdbcType=VARCHAR},
-            HOBBY       = #{hobby,jdbcType=VARCHAR},
-            REMARK      = #{remark,jdbcType=VARCHAR},
-            CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
-        where ID = #{id,jdbcType=INTEGER}
+        set dept_id     = #{deptId,jdbcType=INTEGER},
+            job_id      = #{jobId,jdbcType=INTEGER},
+            name        = #{name,jdbcType=VARCHAR},
+            card_id     = #{cardId,jdbcType=VARCHAR},
+            address     = #{address,jdbcType=VARCHAR},
+            post_code   = #{postCode,jdbcType=VARCHAR},
+            tel         = #{tel,jdbcType=VARCHAR},
+            phone       = #{phone,jdbcType=VARCHAR},
+            qq_num      = #{qqNum,jdbcType=VARCHAR},
+            email       = #{email,jdbcType=VARCHAR},
+            sex         = #{sex,jdbcType=INTEGER},
+            party       = #{party,jdbcType=VARCHAR},
+            birthday    = #{birthday,jdbcType=TIMESTAMP},
+            race        = #{race,jdbcType=VARCHAR},
+            education   = #{education,jdbcType=VARCHAR},
+            speciality  = #{speciality,jdbcType=VARCHAR},
+            hobby       = #{hobby,jdbcType=VARCHAR},
+            remark      = #{remark,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="getIdList" resultType="int">
+        select id
+        from employee_inf
+        where id > 0
+    </select>
 </mapper>

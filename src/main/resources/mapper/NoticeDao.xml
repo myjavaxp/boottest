@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.boottest.dao.NoticeDao">
     <resultMap id="BaseResultMap" type="com.example.boottest.entity.Notice">
-        <id column="ID" jdbcType="INTEGER" property="id"/>
-        <result column="TITLE" jdbcType="VARCHAR" property="title"/>
-        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
-        <result column="USER_ID" jdbcType="INTEGER" property="userId"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.boottest.entity.Notice">
-        <result column="CONTENT" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, TITLE, CREATE_DATE, USER_ID
+        id, title, create_date, user_id
     </sql>
     <sql id="Blob_Column_List">
-        CONTENT
+        content
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
@@ -22,16 +22,16 @@
         ,
         <include refid="Blob_Column_List"/>
         from notice_inf
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from notice_inf
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.example.boottest.entity.Notice">
-        insert into notice_inf (ID, TITLE, CREATE_DATE,
-                                USER_ID, CONTENT)
+        insert into notice_inf (id, title, create_date,
+                                user_id, content)
         values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
                 #{userId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
     </insert>
@@ -39,19 +39,19 @@
         insert into notice_inf
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                ID,
+                id,
             </if>
             <if test="title != null">
-                TITLE,
+                title,
             </if>
             <if test="createDate != null">
-                CREATE_DATE,
+                create_date,
             </if>
             <if test="userId != null">
-                USER_ID,
+                user_id,
             </if>
             <if test="content != null">
-                CONTENT,
+                content,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -76,33 +76,33 @@
         update notice_inf
         <set>
             <if test="title != null">
-                TITLE = #{title,jdbcType=VARCHAR},
+                title = #{title,jdbcType=VARCHAR},
             </if>
             <if test="createDate != null">
-                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+                create_date = #{createDate,jdbcType=TIMESTAMP},
             </if>
             <if test="userId != null">
-                USER_ID = #{userId,jdbcType=INTEGER},
+                user_id = #{userId,jdbcType=INTEGER},
             </if>
             <if test="content != null">
-                CONTENT = #{content,jdbcType=LONGVARCHAR},
+                content = #{content,jdbcType=LONGVARCHAR},
             </if>
         </set>
-        where ID = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.boottest.entity.Notice">
         update notice_inf
-        set TITLE       = #{title,jdbcType=VARCHAR},
-            CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-            USER_ID     = #{userId,jdbcType=INTEGER},
-            CONTENT     = #{content,jdbcType=LONGVARCHAR}
-        where ID = #{id,jdbcType=INTEGER}
+        set title       = #{title,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            user_id     = #{userId,jdbcType=INTEGER},
+            content     = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.example.boottest.entity.Notice">
         update notice_inf
-        set TITLE       = #{title,jdbcType=VARCHAR},
-            CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-            USER_ID     = #{userId,jdbcType=INTEGER}
-        where ID = #{id,jdbcType=INTEGER}
+        set title       = #{title,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            user_id     = #{userId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

@@ -1,8 +1,7 @@
 package com.example.boottest.cache;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cache.Cache;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.connection.RedisServerCommands;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+@Slf4j
 public class MybatisRedisCache implements Cache {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MybatisRedisCache.class);
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock(true);
     private String id;
     private static RedisTemplate<String, Object> redisTemplate;
@@ -31,7 +30,7 @@ public class MybatisRedisCache implements Cache {
 
     public MybatisRedisCache(final String id) {
         Assert.notNull(id, "Cache instances require an ID");
-        LOGGER.info("Redis Cache id: " + id);
+        log.info("Redis Cache id: " + id);
         this.id = id;
     }
 
@@ -70,7 +69,7 @@ public class MybatisRedisCache implements Cache {
             c.flushDb();
             c.flushAll();
             c.close();
-            LOGGER.info("Redis缓存已清空");
+            log.info("Redis缓存已清空");
             return 1L;
         });
     }
