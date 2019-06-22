@@ -5,7 +5,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>boottest</artifactId>
-    <version>2.1.4.RELEASE</version>
+    <version>2.1.6.RELEASE</version>
     <packaging>war</packaging>
     <name>boottest</name>
     <description>Demo project for Spring Boot</description>
